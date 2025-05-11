@@ -23,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conteudo .= "Mensagem:\n$mensagem\n";
 
     // Cabeçalhos do e-mail
-    $headers = "From: $nome <$email>";
+    $headers = "From: $nome <$email>\r\n";
+    $headers .= "Reply-To: $email\r\n"; // Para responder ao e-mail original
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n"; // Garantir que o conteúdo seja tratado como texto simples
 
     // Enviar o e-mail
     if (mail($para, $assunto, $conteudo, $headers)) {
